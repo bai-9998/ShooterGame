@@ -13,6 +13,11 @@ class AShooterGameGameMode : public AGameModeBase
 
 public:
 	AShooterGameGameMode();
+
+	virtual void Tick(float DeltaSeconds) override;
+
+	UFUNCTION(BlueprintNativeEvent)
+	void OnVictory();
 };
 
 

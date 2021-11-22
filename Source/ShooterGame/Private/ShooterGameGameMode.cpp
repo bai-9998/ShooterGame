@@ -3,6 +3,7 @@
 #include "ShooterGameGameMode.h"
 #include "ShooterGameCharacter.h"
 #include "UObject/ConstructorHelpers.h"
+#include "MyGameStateBase.h"
 
 AShooterGameGameMode::AShooterGameGameMode()
 {
@@ -13,3 +14,22 @@ AShooterGameGameMode::AShooterGameGameMode()
 		DefaultPawnClass = PlayerPawnBPClass.Class;
 	}
 }
+
+void AShooterGameGameMode::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+
+	AMyGameStateBase* GS = GetGameState<AMyGameStateBase>();
+	if (GS)
+	{
+		if (GS->Score==7)
+		{
+			OnVictory();
+		}
+	}
+}
+
+void AShooterGameGameMode::OnVictory_Implementation()
+{
+}
+
