@@ -3,7 +3,10 @@
 
 #include "Grenade.h"
 
+AGrenade::AGrenade()
+{
 
+}
 
 void AGrenade::StartFire()
 {
@@ -11,6 +14,11 @@ void AGrenade::StartFire()
 }
 
 void AGrenade::StopFire()
+{
+
+}
+
+void AGrenade::OnExplode()
 {
 
 }

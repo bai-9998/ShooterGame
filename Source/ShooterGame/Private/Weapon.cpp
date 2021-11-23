@@ -42,7 +42,7 @@ void AWeapon::FireBase()
 	if (FireAnimation != nullptr)
 	{
 		// Get the animation object for the arms mesh
-		UAnimInstance* AnimInstance = MS->GetAnimInstance();
+		UAnimInstance* AnimInstance = Mesh->GetAnimInstance();
 		if (AnimInstance != nullptr)
 		{
 			AnimInstance->Montage_Play(FireAnimation, 1.f);

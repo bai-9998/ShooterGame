@@ -14,9 +14,6 @@ UCLASS()
 class SHOOTERGAME_API AWeapon : public AActor
 {
 	GENERATED_BODY()
-	
-	UPROPERTY(VisibleAnywhere, Category=Mesh)
-	USkeletalMeshComponent* MS;
 
 public:	
 	// Sets default values for this actor's properties
@@ -48,6 +45,9 @@ public:
 	/** AnimMontage to play each time we fire */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 	UAnimMontage* FireAnimation;
+
+	UFUNCTION(BlueprintCallable)
+	USkeletalMeshComponent* GetGunMesh(){return Mesh;}
 
 	UPROPERTY(EditAnywhere)
 	FName	MuzzleSocket;
