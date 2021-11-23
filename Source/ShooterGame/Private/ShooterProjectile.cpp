@@ -39,12 +39,14 @@ void AShooterProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor,
 	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherComp->IsSimulatingPhysics())
 	{
 		//
-		OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
+		//OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
 
-		if (GetLocalRole() == ROLE_Authority) 
-		{
-			Destroy();
-		}
+		Destroy();
+		////如果这个运行中的引擎实例负责掌管此 actor
+		//if (GetLocalRole() == ROLE_Authority) 
+		//{
+		//	Destroy();
+		//}
 	}
 }
 

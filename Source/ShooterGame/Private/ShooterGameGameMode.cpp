@@ -22,7 +22,7 @@ void AShooterGameGameMode::Tick(float DeltaSeconds)
 	AMyGameStateBase* GS = GetGameState<AMyGameStateBase>();
 	if (GS)
 	{
-		if (GS->Score==7)
+		if (GS->Score==ScoreOnVictory)
 		{
 			OnVictory();
 		}

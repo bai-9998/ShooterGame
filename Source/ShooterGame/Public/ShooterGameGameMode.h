@@ -18,6 +18,10 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent)
 	void OnVictory();
+
+public:
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	int ScoreOnVictory = 40;
 };
 
 

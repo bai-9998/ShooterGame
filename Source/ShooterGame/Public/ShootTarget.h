@@ -15,6 +15,10 @@ public:
 	// Sets default values for this actor's properties
 	AShootTarget();
 
+private:
+	UPROPERTY(VisibleAnywhere)
+	class UStaticMeshComponent* StaticMeshComponent;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

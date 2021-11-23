@@ -2,6 +2,9 @@
 
 
 #include "ShootTarget.h"
+#include "Components/StaticMeshComponent.h"
+#include "Engine/CollisionProfile.h"
+#include "Engine/StaticMesh.h"
 
 #include "MyGameStateBase.h"
 
@@ -11,6 +14,13 @@ AShootTarget::AShootTarget()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	StaticMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMeshComponent"));
+	StaticMeshComponent->SetCollisionProfileName(UCollisionProfile::BlockAll_ProfileName);
+	StaticMeshComponent->Mobility = EComponentMobility::Movable;
+	StaticMeshComponent->bUseDefaultCollision = true;
+
+	RootComponent = StaticMeshComponent;
+	
 }
 
 // Called when the game starts or when spawned
@@ -22,13 +32,23 @@ void AShootTarget::BeginPlay()
 
 void AShootTarget::NotifyActorBeginOverlap(AActor* OtherActor)
 {
-	Super::NotifyActorBeginOverlap(OtherActor);
-
-	if (OtherActor)
+	if (StaticMeshComponent->BodyInstance.bSimulatePhysics)
 	{
-		Destroy();
+		if (OtherActor)
+		{
+			Cast<AMyGameStateBase>(GetWorld()->GetGameState())->Score++;
+		}
+	}
+	else
+	{
+		Super::NotifyActorBeginOverlap(OtherActor);
 
-		Cast<AMyGameStateBase>(GetWorld()->GetGameState())->Score++;
+		if (OtherActor)
+		{
+			Destroy();
+
+			Cast<AMyGameStateBase>(GetWorld()->GetGameState())->Score+=5;
+		}
 	}
 }
 

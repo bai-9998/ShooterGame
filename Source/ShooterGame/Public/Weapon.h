@@ -21,6 +21,9 @@ class SHOOTERGAME_API AWeapon : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AWeapon();
+	
+	UPROPERTY(EditAnywhere)
+	USkeletalMeshComponent* Mesh;
 
 protected:
 	// Called when the game starts or when spawned
@@ -31,10 +34,12 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION(BlueprintCallable)
-	void StartFire();
+	virtual void StartFire(){};
 
 	UFUNCTION(BlueprintCallable)
-	void StopFire();
+	virtual void StopFire(){};
+
+	void FireBase();
 
 	/** Sound to play each time we fire */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Gameplay)
@@ -43,29 +48,6 @@ public:
 	/** AnimMontage to play each time we fire */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 	UAnimMontage* FireAnimation;
-
-	UFUNCTION(BlueprintImplementableEvent)
-	void SpawnProjectile();
-
-	UFUNCTION(BlueprintCallable)
-	bool CalcFireInfo(FVector& Location, FVector& Dir);
-
-	void ConsumeAmmo();
-
-	UPROPERTY(EditAnywhere)
-	USkeletalMeshComponent* Mesh;
-
-	UPROPERTY(EditAnywhere)
-	int32 MaxAmmo;
-
-	UPROPERTY(EditAnywhere)
-	int32 CurrentAmmo;
-
-	UPROPERTY(EditAnywhere)
-	int32 AmmoPerShot;
-
-	UPROPERTY(EditAnywhere)
-	float TraceDistance;
 
 	UPROPERTY(EditAnywhere)
 	FName	MuzzleSocket;

@@ -3,7 +3,6 @@
 
 #include "Weapon.h"
 #include "Kismet/GameplayStatics.h"
-#include "Camera/PlayerCameraManager.h"
 #include "Animation/AnimInstance.h"
 
 // Sets default values
@@ -14,11 +13,6 @@ AWeapon::AWeapon()
 
 	Mesh = CreateOptionalDefaultSubobject<USkeletalMeshComponent>(FName("WeaponMesh"));
 
-	MaxAmmo = 1024;
-	CurrentAmmo = MaxAmmo;
-	AmmoPerShot = 1;
-
-	TraceDistance = 100000;
 	MuzzleSocket = "Muzzle";
 }
 
@@ -36,13 +30,8 @@ void AWeapon::Tick(float DeltaTime)
 
 }
 
-
-void AWeapon::StartFire()
+void AWeapon::FireBase()
 {
-	ConsumeAmmo();
-
-	SpawnProjectile();
-
 	// try and play the sound if specified
 	if (FireSound != nullptr)
 	{
@@ -59,29 +48,4 @@ void AWeapon::StartFire()
 			AnimInstance->Montage_Play(FireAnimation, 1.f);
 		}
 	}
-}
-
-void AWeapon::StopFire()
-{
-
-}
-
-bool AWeapon::CalcFireInfo(FVector& Location, FVector& Dir)
-{
-	APlayerCameraManager* CameraManager = UGameplayStatics::GetPlayerCameraManager(this, 0);
-	if (CameraManager)
-	{
-		Location = Mesh->GetSocketLocation(MuzzleSocket);
-		FVector CamLoc = CameraManager->GetCameraLocation();
-		FVector CamDir = CameraManager->GetCameraRotation().Vector();
-		Dir = ((CamLoc + CamDir * TraceDistance) - Location).GetSafeNormal();
-		return true;
-	}
-	else
-		return false;
-}
-
-void AWeapon::ConsumeAmmo()
-{
-	CurrentAmmo = FMath::Max(0, CurrentAmmo - AmmoPerShot);
 }
