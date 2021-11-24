@@ -27,4 +27,13 @@ public:
 	/** Projectile movement component */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
 	UProjectileMovementComponent* GrenadeMovement;
+	
+	UFUNCTION(BlueprintImplementableEvent)
+	void SpawnProjectile();
+
+	UFUNCTION(BlueprintCallable)
+	bool CalcFireInfo(FVector& Location, FVector& Dir);
+
+	UPROPERTY(EditAnywhere)
+	float TraceDistance;
 };

@@ -4,6 +4,8 @@
 #include "Grenade.h"
 
 #include "GameFramework/ProjectileMovementComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "Camera/PlayerCameraManager.h"
 
 AGrenade::AGrenade()
 {
@@ -18,6 +20,11 @@ AGrenade::AGrenade()
 void AGrenade::StartFire()
 {
 	FireBase();
+
+	ConsumeAmmo();
+
+	SpawnProjectile();
+
 	
 	//ProjectileMovement->UpdatedComponent = Mesh;
 	GrenadeMovement->InitialSpeed = 500.f;
@@ -34,4 +41,20 @@ void AGrenade::StopFire()
 void AGrenade::OnExplode()
 {
 
+}
+
+bool AGrenade::CalcFireInfo(FVector& Location, FVector& Dir)
+{
+	APlayerCameraManager* CameraManager = UGameplayStatics::GetPlayerCameraManager(this, 0);
+	if (CameraManager)
+	{
+		Location = Mesh->GetSocketLocation(MuzzleSocket);
+		FVector CamLoc = CameraManager->GetCameraLocation();
+		FVector CamDir = CameraManager->GetCameraRotation().Vector();
+		CamDir += FVector(1, 1, 0);
+		Dir = ((CamLoc + CamDir * TraceDistance) - Location).GetSafeNormal();
+		return true;
+	}
+	else
+		return false;
 }
