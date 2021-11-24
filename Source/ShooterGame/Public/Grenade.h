@@ -6,6 +6,7 @@
 #include "Weapon.h"
 #include "Grenade.generated.h"
 
+class USphereComponent;
 class UProjectileMovementComponent;
 
 UCLASS()
@@ -23,4 +24,7 @@ public:
 	UFUNCTION()
 	void OnExplode();
 
+	/** Projectile movement component */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
+	UProjectileMovementComponent* GrenadeMovement;
 };
