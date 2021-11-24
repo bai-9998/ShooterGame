@@ -27,6 +27,17 @@ public:
 	UFUNCTION(BlueprintCallable)
 	bool CalcFireInfo(FVector& Location, FVector& Dir);
 
+	void ConsumeAmmo();
+	
+	UPROPERTY(EditAnywhere)
+	int32 MaxAmmo;
+
+	UPROPERTY(EditAnywhere)
+	int32 CurrentAmmo;
+
+	UPROPERTY(EditAnywhere)
+	int32 AmmoPerShot;
+
 	UPROPERTY(EditAnywhere)
 	float TraceDistance;
 

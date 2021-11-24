@@ -46,3 +46,8 @@ bool AGun::CalcFireInfo(FVector& Location, FVector& Dir)
 	else
 		return false;
 }
+
+void AGun::ConsumeAmmo()
+{
+	CurrentAmmo = FMath::Max(0, CurrentAmmo - AmmoPerShot);
+}

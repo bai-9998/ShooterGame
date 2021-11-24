@@ -2,7 +2,6 @@
 
 
 #include "Weapon.h"
-
 #include "Kismet/GameplayStatics.h"
 #include "Animation/AnimInstance.h"
 
@@ -49,9 +48,4 @@ void AWeapon::FireBase()
 			AnimInstance->Montage_Play(FireAnimation, 1.f);
 		}
 	}
-}
-
-void AWeapon::ConsumeAmmo()
-{
-	CurrentAmmo = FMath::Max(0, CurrentAmmo - AmmoPerShot);
 }

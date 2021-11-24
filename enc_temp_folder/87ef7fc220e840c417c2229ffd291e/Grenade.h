@@ -22,5 +22,4 @@ public:
 
 	UFUNCTION()
 	void OnExplode();
-
 };

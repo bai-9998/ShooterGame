@@ -36,7 +36,18 @@ public:
 	UFUNCTION(BlueprintCallable)
 	virtual void StopFire(){};
 
+	void ConsumeAmmo();
+
 	void FireBase();
+
+	UPROPERTY(EditAnywhere)
+	int32 MaxAmmo;
+
+	UPROPERTY(EditAnywhere)
+	int32 CurrentAmmo;
+
+	UPROPERTY(EditAnywhere)
+	int32 AmmoPerShot;
 
 	/** Sound to play each time we fire */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Gameplay)
