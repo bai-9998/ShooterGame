@@ -26,11 +26,6 @@ void AGrenade::StartFire()
 	SpawnProjectile();
 
 	
-	//ProjectileMovement->UpdatedComponent = Mesh;
-	GrenadeMovement->InitialSpeed = 500.f;
-	GrenadeMovement->MaxSpeed = 500.f;
-	GrenadeMovement->bRotationFollowsVelocity = true;
-	GrenadeMovement->bShouldBounce = true;
 }
 
 void AGrenade::StopFire()
